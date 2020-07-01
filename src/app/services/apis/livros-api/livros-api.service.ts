@@ -2,7 +2,6 @@ import { Inject, Injectable, Optional } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { environment } from '../../../../environments/environment';
 import { LivroDTO } from './interfaces/livroDTO';
-import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
