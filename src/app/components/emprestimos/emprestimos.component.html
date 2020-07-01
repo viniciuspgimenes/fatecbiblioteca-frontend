@@ -1,1 +1,97 @@
-<p>emprestimos works!</p>
+<div class="d-flex justify-content-end w-100 mb-4">
+  <button type="button" class="btn btn-outline-success w-25" (click)="abrirModal(modalEmprestimo, null)">Emprestar Livro</button>
+</div>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Leitor</th>
+    <th scope="col">Livro</th>
+    <th scope="col">Status</th>
+    <th scope="col">Data</th>
+    <th scope="col">Ação</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let emprestimo of emprestimos; let index = index">
+    <th scope="row">{{ index + 1 }}</th>
+    <td>{{ obterLeitor(emprestimo.leitorId) }}</td>
+    <td>{{ obterLivro(emprestimo.livroId) }}</td>
+    <td>{{ emprestimo.movimentacao }}</td>
+    <td>{{ emprestimo.dataMovimentacao | date }}</td>
+    <td class="d-flex">
+<!--      <button type="button" class="btn btn-primary d-flex align-items-center mx-2" (click)="abrirModal(modalVisualizacao, emprestimo)"><span class="material-icons text-light">remove_red_eye</span></button>-->
+      <button type="button" class="btn btn-success d-flex align-items-center mx-2" (click)="abrirModal(modalEdicao, emprestimo)"><span class="material-icons text-light">edit</span></button>
+<!--      <button type="button" class="btn btn-danger d-flex align-items-center mx-2" (click)="abrirModal(modalExclusao, emprestimo)"><span class="material-icons text-light">delete_outline</span></button>-->
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #modalEdicao>
+  <div class="modal-header">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="fecharModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="leitor">Leitor</label>
+        <select class="form-control" [(ngModel)]="leitorSelecionadoId" id="leitor" name="leitor">
+          <option *ngFor="let leitor of leitores" [ngValue]="leitor.id">{{leitor.nome}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="livro">Livro</label>
+        <select class="form-control" [(ngModel)]="livroSelecionadoId" id="livro" name="livro">
+          <option *ngFor="let livro of livros" [ngValue]="livro.id">{{livro.titulo}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="dataMovimentacao">Data</label>
+        <input disabled type="text" class="form-control" [(ngModel)]="emprestimoSelecionado && emprestimoSelecionado.dataMovimentacao" id="dataMovimentacao" name="dataMovimentacao" aria-describedby="emailHelp" placeholder="Insira o titulo">
+      </div>
+      <div class="form-group">
+        <label for="movimentacao">Status</label>
+        <input disabled type="text" class="form-control" [(ngModel)]="emprestimoSelecionado && emprestimoSelecionado.movimentacao" id="movimentacao" name="movimentacao" aria-describedby="emailHelp" placeholder="Insira o titulo">
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-danger text-center w-25 mt-3 mx-1" (click)="editarEmprestimo(emprestimoSelecionado)">Confirmar</button>
+        <button type="button" class="btn btn-primary text-center w-25 mt-3 mx-1" (click)="fecharModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #modalEmprestimo>
+  <div class="modal-header">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="fecharModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="novoLeitor">Leitor</label>
+        <select class="form-control" [(ngModel)]="leitorSelecionadoId" id="novoLeitor" name="novoLeitor">
+          <option *ngFor="let leitor of leitores" [ngValue]="leitor.id">{{leitor.nome}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="novoLivro">Livro</label>
+        <select class="form-control" [(ngModel)]="livroSelecionadoId" id="novoLivro" name="novoLivro">
+          <option *ngFor="let livro of livros" [ngValue]="livro.id">{{livro.titulo}}</option>
+        </select>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-success text-center w-25 mt-3 mx-1" (click)="emprestarLivro(livroSelecionadoId, leitorSelecionadoId)">Confirmar</button>
+        <button type="button" class="btn btn-danger text-center w-25 mt-3 mx-1" (click)="fecharModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
