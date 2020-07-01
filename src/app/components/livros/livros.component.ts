@@ -48,4 +48,11 @@ export class LivrosComponent implements OnInit {
       this.listarLivros();
     });
   }
+
+  criarLivro(livro: LivroDTO) {
+    this.livrosApiService.criarLivro(livro).subscribe(() => {
+      this.fecharModal();
+      this.listarLivros();
+    });
+  }
 }

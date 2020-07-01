@@ -48,4 +48,11 @@ export class LeitoresComponent implements OnInit {
       this.listarLeitores();
     });
   }
+
+  criarLeitor(leitorSelecionado: LeitorDTO) {
+    this.leitoresApiService.criarLeitor(leitorSelecionado).subscribe(() => {
+      this.fecharModal();
+      this.listarLeitores();
+    });
+  }
 }

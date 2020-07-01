@@ -1,3 +1,7 @@
+<div class="d-flex justify-content-end w-100 mb-4">
+  <button type="button" class="btn btn-outline-success w-25" (click)="abrirModal(modalCriacao, null)">Criar Leitor</button>
+</div>
+
 <table class="table">
   <thead>
   <tr>
@@ -32,16 +36,16 @@
   <div class="modal-body">
     <form>
       <div class="form-group">
-        <label for="titulo">Titulo</label>
-        <input type="text" class="form-control" [(ngModel)]="leitorSelecionado && leitorSelecionado.nome" id="titulo" name="titulo" aria-describedby="emailHelp" placeholder="Insira o titulo">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" [(ngModel)]="leitorSelecionado && leitorSelecionado.nome" id="nome" name="nome" aria-describedby="emailHelp" placeholder="Insira um nome">
       </div>
       <div class="form-group">
-        <label for="autor">Autor</label>
-        <input type="text" class="form-control" [(ngModel)]="leitorSelecionado && leitorSelecionado.cpf" id="autor" name="autor" aria-describedby="emailHelp" placeholder="Insira o titulo">
+        <label for="cpf">CPF</label>
+        <input type="text" class="form-control" [(ngModel)]="leitorSelecionado && leitorSelecionado.cpf" id="cpf" name="cpf" aria-describedby="emailHelp" placeholder="Insira um CPF">
       </div>
       <div class="form-group">
-        <label for="ano">Ano</label>
-        <input type="text" class="form-control" [(ngModel)]="leitorSelecionado && leitorSelecionado.preferencias" id="ano" name="ano" aria-describedby="emailHelp" placeholder="Insira o titulo">
+        <label for="preferencias">Preferências</label>
+        <input type="text" class="form-control" [(ngModel)]="leitorSelecionado && leitorSelecionado.preferencias" id="preferencias" name="preferencias" aria-describedby="emailHelp" placeholder="Insira um tema preferido">
       </div>
       <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-danger text-center w-25 mt-3 mx-1" (click)="editarLeitor(leitorSelecionado)">Confirmar</button>
@@ -80,5 +84,33 @@
     <p><strong>CPF: </strong>{{leitorSelecionado?.cpf}}</p>
     <p><strong>Preferências: </strong>{{leitorSelecionado?.preferencias}}</p>
     <button type="button" class="btn btn-primary text-center w-100 mt-3" (click)="fecharModal()">Fechar</button>
+  </div>
+</ng-template>
+
+<ng-template #modalCriacao>
+  <div class="modal-header">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="fecharModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="novoNome">Nome</label>
+        <input type="text" class="form-control" [(ngModel)]="leitorSelecionado && leitorSelecionado.nome" id="novoNome" name="novoNome" aria-describedby="emailHelp" placeholder="Insira um nome">
+      </div>
+      <div class="form-group">
+        <label for="novoCpf">CPF</label>
+        <input type="text" class="form-control" [(ngModel)]="leitorSelecionado && leitorSelecionado.cpf" id="novoCpf" name="novoCpf" aria-describedby="emailHelp" placeholder="Insira um CPF">
+      </div>
+      <div class="form-group">
+        <label for="novasPreferencias">Preferências</label>
+        <input type="text" class="form-control" [(ngModel)]="leitorSelecionado && leitorSelecionado.preferencias" id="novasPreferencias" name="novasPreferencias" aria-describedby="emailHelp" placeholder="Insira um tema preferido">
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-success text-center w-25 mt-3 mx-1" (click)="criarLeitor(leitorSelecionado)">Confirmar</button>
+        <button type="button" class="btn btn-danger text-center w-25 mt-3 mx-1" (click)="fecharModal()">Cancelar</button>
+      </div>
+    </form>
   </div>
 </ng-template>
