@@ -1,1 +1,96 @@
-<p>livros works!</p>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Autor</th>
+    <th scope="col">Titulo</th>
+    <th scope="col">Ano</th>
+    <th scope="col">Ação</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let livro of livros; let index = index">
+      <th scope="row">{{ index + 1 }}</th>
+      <td>{{ livro.autor }}</td>
+      <td>{{ livro.titulo }}</td>
+      <td>{{ livro.ano }}</td>
+      <td class="d-flex">
+        <button type="button" class="btn btn-primary d-flex align-items-center mx-2" (click)="abrirModal(modalVisualizacao, livro)"><span class="material-icons text-light">remove_red_eye</span></button>
+        <button type="button" class="btn btn-success d-flex align-items-center mx-2" (click)="abrirModal(modalEdicao, livro)"><span class="material-icons text-light">edit</span></button>
+        <button type="button" class="btn btn-danger d-flex align-items-center mx-2" (click)="abrirModal(modalExclusao, livro)"><span class="material-icons text-light">delete_outline</span></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #modalEdicao>
+  <div class="modal-header">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="fecharModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="titulo">Titulo</label>
+        <input type="text" class="form-control" [(ngModel)]="livroSelecionado && livroSelecionado.titulo" id="titulo" name="titulo" aria-describedby="emailHelp" placeholder="Insira o titulo">
+      </div>
+      <div class="form-group">
+        <label for="autor">Autor</label>
+        <input type="text" class="form-control" [(ngModel)]="livroSelecionado && livroSelecionado.autor" id="autor" name="autor" aria-describedby="emailHelp" placeholder="Insira o titulo">
+      </div>
+      <div class="form-group">
+        <label for="ano">Ano</label>
+        <input type="text" class="form-control" [(ngModel)]="livroSelecionado && livroSelecionado.ano" id="ano" name="ano" aria-describedby="emailHelp" placeholder="Insira o titulo">
+      </div>
+      <div class="form-group">
+        <label for="editora">Editora</label>
+        <input type="text" class="form-control" [(ngModel)]="livroSelecionado && livroSelecionado.editora" id="editora" name="editora" aria-describedby="emailHelp" placeholder="Insira o titulo">
+      </div>
+      <div class="form-group">
+        <label for="isbn">ISBN</label>
+        <input type="text" class="form-control" [(ngModel)]="livroSelecionado && livroSelecionado.isbn" id="isbn" name="isbn" aria-describedby="emailHelp" placeholder="Insira o titulo">
+      </div>
+      <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-danger text-center w-25 mt-3 mx-1" (click)="editarLivro(livroSelecionado)">Confirmar</button>
+        <button type="button" class="btn btn-primary text-center w-25 mt-3 mx-1" (click)="fecharModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #modalExclusao>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Deseja Excluir?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="fecharModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Titulo: </strong>{{livroSelecionado?.titulo}}</p>
+    <p><strong>Autor: </strong>{{livroSelecionado?.autor}}</p>
+    <p><strong>Ano: </strong>{{livroSelecionado?.ano}}</p>
+    <p><strong>Editora: </strong>{{livroSelecionado?.editora}}</p>
+    <p><strong>ISBN: </strong>{{livroSelecionado?.isbn}}</p>
+    <div class="d-flex justify-content-center">
+      <button type="button" class="btn btn-danger text-center w-25 mt-3 mx-1" (click)="excluirLivro(livroSelecionado?.id)">Confirmar</button>
+      <button type="button" class="btn btn-primary text-center w-25 mt-3 mx-1" (click)="fecharModal()">Cancelar</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #modalVisualizacao>
+  <div class="modal-header">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="fecharModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Titulo: </strong>{{livroSelecionado?.titulo}}</p>
+    <p><strong>Autor: </strong>{{livroSelecionado?.autor}}</p>
+    <p><strong>Ano: </strong>{{livroSelecionado?.ano}}</p>
+    <p><strong>Editora: </strong>{{livroSelecionado?.editora}}</p>
+    <p><strong>ISBN: </strong>{{livroSelecionado?.isbn}}</p>
+    <button type="button" class="btn btn-primary text-center w-100 mt-3" (click)="fecharModal()">Fechar</button>
+  </div>
+</ng-template>

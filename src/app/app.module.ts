@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { EmprestimosComponent } from './components/emprestimos/emprestimos.component';
 import { LeitoresComponent } from './components/leitores/leitores.component';
 import { LivrosComponent } from './components/livros/livros.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { LivrosComponent } from './components/livros/livros.component';
     AppBootstrapModule,
     RouterModule,
     AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
